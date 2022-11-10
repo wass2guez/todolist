@@ -16,18 +16,23 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({ open, handleClose, todo,todoList, handleEdit }) {
-  const [newTodo, setNewTodo] = React.useState();
-  const handleEditTodo = (e) => {
-    e.preventDefault()
+export default function ModalEditTodo({
+  open,
+  handleClose,
+  todo,
+  handleEditTodo,
+}) {
+  const [value, setValue] = React.useState(todo.text);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleEditTodo(todo.id, value);
+
     handleClose();
-    handleEdit(todo , newTodo);
-   
-    console.log(todoList)
   };
-  const handleChange = (e)=> {
-    setNewTodo(e.target.value)
-  }
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
 
   return (
     <Modal
@@ -45,14 +50,8 @@ export default function BasicModal({ open, handleClose, todo,todoList, handleEdi
         >
           EDIT YOUR TODO
         </Typography>
-        <form onSubmit={handleEditTodo}>
-          <TextField
-          onChange={handleChange}
-            hiddenLabel
-            id="filled-hidden-label-normal"
-            defaultValue={todo}
-            variant="filled"
-          />
+        <form onSubmit={handleSubmit}>
+          <TextField value={value} onChange={handleChange} variant="filled" />
         </form>
       </Box>
     </Modal>
