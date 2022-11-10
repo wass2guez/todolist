@@ -1,23 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./page/Home";
+import bg from "../src/components/assets/bg.jpg";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        
+        height: "100vh",
+        width: "100vw",
+      }}
+    >
+      <CssBaseline />
+
+      <Home />
     </div>
   );
 }
