@@ -9,36 +9,50 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModalEditTodo from "../modal/ModalEditTodo";
 import EditIcon from "@mui/icons-material/Edit";
+import { Box, Stack } from "@mui/material/";
 
 const TodosDisplay = (props) => {
-  const { todos, handleToggleCheck, handleEditTodo } = props;
+  const { todos, handleToggleCheck, handleEditTodo, handleDeleteTodo } = props;
   return (
-    <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {todos.map((todo) => {
-        return (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            handleToggleCheck={() => handleToggleCheck(todo.id)}
-            handleEditTodo={handleEditTodo}
-          />
-        );
-      })}
-    </List>
+   
+      <List sx={{ width: "100%", maxWidth: 360}}>
+        <Stack bgcolor= "background.paper"   spacing={2}>
+          {todos.map((todo) => {
+            return (
+              <Todo
+              
+                key={todo.id}
+                todo={todo}
+                handleToggleCheck={() => handleToggleCheck(todo.id)}
+                handleEditTodo={handleEditTodo}
+                handleDeleteTodo={handleDeleteTodo}
+              />
+            );
+          })}
+        </Stack>
+      </List>
+   
   );
 };
 
 const Todo = (props) => {
-  const { todo, handleToggleCheck, handleEditTodo } = props;
-  const { id, text,checked } = todo
+  const { todo, handleToggleCheck, handleEditTodo, handleDeleteTodo } = props;
+  const { id, text, checked } = todo;
   const [open, setOpen] = React.useState(false);
+
   return (
-    <>
+    <Box>
       <ListItem
+      
         secondaryAction={
-          <IconButton edge="end" onClick={() => setOpen(true)}>
-            <EditIcon />
-          </IconButton>
+          <Box>
+            <IconButton onClick={() => handleDeleteTodo(id)}>
+              <DeleteIcon />
+            </IconButton>
+            <IconButton edge="end" onClick={() => setOpen(true)}>
+              <EditIcon />
+            </IconButton>
+          </Box>
         }
         disablePadding
       >
@@ -60,7 +74,8 @@ const Todo = (props) => {
         todo={todo}
         handleEditTodo={handleEditTodo}
       />
-    </>
+      
+    </Box>
   );
 };
 

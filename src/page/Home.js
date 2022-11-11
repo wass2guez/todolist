@@ -1,8 +1,9 @@
 import React from "react";
 import { v4 as generateId } from "uuid";
-import { Container } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import AddTodo from "../components/v2/AddTodo";
 import TodosDisplay from "../components/v2/TodosDisplay";
+import { Box } from '@mui/material/';
 
 const Home = () => {
   const [todos, setTodos] = React.useState([]);
@@ -36,6 +37,7 @@ const Home = () => {
     );
   };
 
+
   const handleEditTodo = (id,newText) => {
     setTodos(
       todos.map((todo) => {
@@ -49,6 +51,16 @@ const Home = () => {
       })
     );
   };
+
+  const handleDeleteTodo = (id)=> {
+    setTodos(todos.filter((elem)=> elem.id !== id))
+    console.log(todos)
+
+  }
+ const filterCheckedTodos = () => {
+  setTodos(todos.filter((elem)=> elem.checked === true))
+
+ }
 
   // const [addTodo, setAddTodo] = useState("");
   // const [todoList, setTodoList] = useState([]);
@@ -71,7 +83,14 @@ const Home = () => {
         todos={todos}
         handleToggleCheck={handleToggleCheck}
         handleEditTodo={handleEditTodo}
+        handleDeleteTodo={handleDeleteTodo}
+        filterCheckedTodos={filterCheckedTodos}
       />
+      <Box sx={{display : 'flex' , alignItems : 'center'}}>
+
+      <Button onClick={filterCheckedTodos} sx={{color : 'white'}}>filterChecked</Button>
+      <Typography sx={{backgroundColor : 'green'}} variant ='h5' >There is : {todos.length} Todos Left</Typography>
+      </Box>
     </Container>
   );
 };

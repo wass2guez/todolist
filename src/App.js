@@ -6,12 +6,12 @@ function App() {
   return (
     <div
       style={{
-        // backgroundImage: `url(${bg})`,
-        // backgroundRepeat: "no-repeat",
-        // backgroundSize: "cover",
+        backgroundImage: `url(${bg})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
         
-        // height: "100vh",
-        // width: "100vw",
+        height: "100vh",
+        width: "100vw",
       }}
     >
       <CssBaseline />
